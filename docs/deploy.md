@@ -22,6 +22,38 @@ O navegador carrega, a partir do artefato publicado:
 - `src/main.js`
 - arquivos em `src/assets/`
 
+## Configuracao obrigatoria do GitHub Pages
+
+Como o site final e gerado durante o workflow e publicado a partir de `dist/`,
+o GitHub Pages deve usar o proprio GitHub Actions como origem da publicacao.
+
+No repositorio, acesse:
+
+```text
+Settings -> Pages -> Build and deployment -> Source
+```
+
+A opcao deve estar configurada como:
+
+```text
+GitHub Actions
+```
+
+Nao use `Deploy from a branch` para este projeto. Nesse modo, o GitHub Pages
+publica diretamente os arquivos versionados na branch `main` e ignora o
+artefato `dist/` gerado pelo workflow. Como `blog/index.html` e as paginas das
+postagens sao criadas apenas dentro de `dist/`, essa configuracao provoca erro
+404 em rotas como `/blog/` mesmo quando o workflow de build termina com sucesso.
+
+Para diagnosticar esse problema pela API do GitHub Pages, o campo esperado e:
+
+```text
+build_type: workflow
+```
+
+Se aparecer `build_type: legacy`, verifique novamente a opcao `Source` em
+`Settings -> Pages`.
+
 ## Validacao local
 
 Para testar localmente a mesma estrutura publicada pelo GitHub Pages, gere o
@@ -56,7 +88,7 @@ Antes de publicar, confira:
 
 ## Publicacao no GitHub Pages
 
-O deploy esperado e via branch principal do repositorio
+O deploy esperado e disparado por commits na branch principal do repositorio
 `alexcarlos06/alexcarlos06.github.io`.
 
 Fluxo comum:
@@ -68,8 +100,13 @@ git commit -m "feat: adiciona blog estatico com geracao via markdown"
 git push origin main
 ```
 
-O GitHub Actions publica automaticamente a partir da branch `main`, usando o
-conteudo gerado em `dist/`.
+O GitHub Actions executa automaticamente a partir da branch `main`, gera o
+conteudo em `dist/`, envia esse diretorio como artefato do GitHub Pages e realiza
+o deploy pelo job `deploy`.
+
+O workflow valida a existencia da home, do indice do blog e de pelo menos uma
+postagem gerada sem depender de slugs especificos. Assim, adicionar ou remover
+artigos Markdown nao exige alterar manualmente a validacao do deploy.
 
 ## Checklist antes do commit
 
@@ -80,6 +117,17 @@ conteudo gerado em `dist/`.
 - Arquivos temporarios, logs e builds nao foram adicionados.
 - A pasta original de referencia do design system nao e necessaria para o site
   rodar.
+
+## Checklist do deploy
+
+- `Settings -> Pages -> Source` esta configurado como `GitHub Actions`.
+- O job `build` do workflow terminou com sucesso.
+- A etapa `Validate build output` terminou com sucesso.
+- O artefato do Pages foi enviado com sucesso.
+- O job `deploy` terminou com sucesso.
+- `https://alexcarlos06.github.io/` responde normalmente.
+- `https://alexcarlos06.github.io/blog/` responde normalmente.
+- Uma rota de postagem em `/blog/<slug>/` responde normalmente.
 
 ## Observacoes tecnicas
 
