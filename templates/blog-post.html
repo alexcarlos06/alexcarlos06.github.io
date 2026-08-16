@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description }}">
+
+    <title>{{ title }} | Alex Sousa</title>
+
+    <link rel="stylesheet" href="{{ asset_prefix }}src/styles/global.css">
+    <link rel="stylesheet" href="{{ asset_prefix }}src/styles/blog.css">
+</head>
+
+<body>
+    <header class="nav">
+        <div class="container nav-content">
+            <a href="{{ asset_prefix }}index.html" class="nav-brand">
+                Alex Sousa
+            </a>
+
+            <nav class="nav-links" aria-label="Navegacao principal">
+                <a href="{{ asset_prefix }}index.html#sobre">Sobre</a>
+                <a href="{{ asset_prefix }}index.html#projetos">Projetos</a>
+                <a href="{{ asset_prefix }}blog/">Blog</a>
+                <a href="{{ asset_prefix }}index.html#estudos">Estudos</a>
+                <a href="{{ asset_prefix }}index.html#stack">Stack</a>
+                <a href="{{ asset_prefix }}index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="blog-page">
+        <article class="container article">
+            <a class="btn btn-ghost article__back" href="{{ asset_prefix }}blog/">
+                Voltar ao blog
+            </a>
+
+            <header class="article__header">
+                <span class="card-kicker">{{ formatted_date }}</span>
+                <h1 class="article__title">{{ title }}</h1>
+                <p class="article__description">{{ description }}</p>
+                <div class="article__tags">
+                    {{ tags_html }}
+                </div>
+            </header>
+
+            <div class="article__content">
+                {{ content }}
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            © <span id="current-year"></span> Alex Sousa.
+        </div>
+    </footer>
+
+    <script src="{{ asset_prefix }}src/main.js"></script>
+</body>
+</html>
