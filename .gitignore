@@ -9,13 +9,13 @@ Thumbs.db
 # Logs
 *.log
 
-# Dependências futuras
+# Dependencias futuras
 node_modules/
 
 # Builds futuros
 dist/
 build/
 
-# Variáveis de ambiente futuras
+# Variaveis de ambiente futuras
 .env
 .env.*
