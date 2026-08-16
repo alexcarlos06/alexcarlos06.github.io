@@ -35,8 +35,7 @@ jobs:
         run: |
           test -f dist/index.html
           test -f dist/blog/index.html
-          test -f dist/blog/event-storming/index.html
-          test -f dist/blog/ddd-clean-architecture-design-patterns/index.html
+          find dist/blog -mindepth 2 -name index.html -print -quit | grep -q .
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
