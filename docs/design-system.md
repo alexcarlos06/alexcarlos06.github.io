@@ -12,6 +12,10 @@ Novas páginas devem importar sempre:
 `src/styles/global.css` importa `src/design-system/styles.css` e adiciona
 ajustes específicos do site.
 
+O blog também importa `src/styles/blog.css` para estilos específicos de lista
+de artigos e leitura de postagens. Esse arquivo deve continuar dependente dos
+tokens e componentes existentes.
+
 ## Conceito visual
 
 O site é um laboratório pessoal de tecnologia. A identidade visual deve manter:
