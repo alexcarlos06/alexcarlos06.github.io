@@ -1,0 +1,49 @@
+:root {
+  /* Ground */
+  --color-bg: #0a0d0b;
+  --color-bg-raised: #0e1310;
+  --color-surface: #131916;
+  --color-border: #232b26;
+  --color-border-strong: #35403a;
+
+  /* Text */
+  --color-text-primary: #f1f3ef;
+  --color-text-secondary: #9aa39a;
+  --color-text-tertiary: #5f685f;
+
+  /* Accent 1 — neon green (signal, primary actions, links) */
+  --color-accent-100: oklch(95% 0.045 160);
+  --color-accent-200: oklch(89% 0.075 160);
+  --color-accent-300: oklch(82% 0.11 160);
+  --color-accent-400: oklch(74% 0.15 160);
+  --color-accent-500: oklch(66% 0.185 160);
+  --color-accent-600: oklch(56% 0.175 160);
+  --color-accent-700: oklch(46% 0.15 160);
+  --color-accent-800: oklch(36% 0.12 160);
+  --color-accent-900: oklch(26% 0.085 160);
+  --color-accent: var(--color-accent-500);
+  --color-accent-ink: #06140c;
+
+  /* Accent 2 — warm amber (from the beard/skin warmth in the reference photo; secondary emphasis, MBA/study content) */
+  --color-accent-2-100: oklch(94% 0.04 55);
+  --color-accent-2-200: oklch(87% 0.075 52);
+  --color-accent-2-300: oklch(80% 0.12 48);
+  --color-accent-2-400: oklch(72% 0.16 44);
+  --color-accent-2-500: oklch(64% 0.185 40);
+  --color-accent-2-600: oklch(55% 0.17 36);
+  --color-accent-2-700: oklch(46% 0.145 33);
+  --color-accent-2-800: oklch(36% 0.11 30);
+  --color-accent-2-900: oklch(26% 0.08 28);
+  --color-accent-2: var(--color-accent-2-500);
+
+  /* Neutral ramp — green-tinted grays for chrome and surfaces */
+  --color-neutral-100: oklch(97% 0.006 150);
+  --color-neutral-200: oklch(90% 0.009 150);
+  --color-neutral-300: oklch(80% 0.011 150);
+  --color-neutral-400: oklch(68% 0.013 150);
+  --color-neutral-500: oklch(55% 0.013 150);
+  --color-neutral-600: oklch(44% 0.013 150);
+  --color-neutral-700: oklch(34% 0.011 150);
+  --color-neutral-800: oklch(22% 0.009 150);
+  --color-neutral-900: oklch(13% 0.007 150);
+}
