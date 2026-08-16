@@ -6,26 +6,28 @@
 
     <meta
         name="description"
-        content="Site pessoal de Alex Sousa sobre tecnologia, arquitetura de software, inteligência artificial e projetos."
+        content="Laboratório pessoal de Alex Sousa sobre tecnologia, arquitetura de software, inteligência artificial, estudos e projetos."
     >
 
-    <title>Alex Sousa | Tecnologia e Projetos</title>
+    <title>Alex Sousa | Laboratório pessoal</title>
 
     <link rel="stylesheet" href="./src/styles/global.css">
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="container header__content">
-            <a href="/" class="logo">
+    <header class="nav">
+        <div class="container nav-content">
+            <a href="#inicio" class="nav-brand">
                 Alex Sousa
             </a>
 
-            <nav class="navigation">
-                <a href="#inicio">Início</a>
+            <nav class="nav-links" aria-label="Navegação principal">
                 <a href="#sobre">Sobre</a>
                 <a href="#projetos">Projetos</a>
+                <a href="#blog">Blog</a>
+                <a href="#estudos">Estudos</a>
+                <a href="#stack">Stack</a>
                 <a href="#contato">Contato</a>
             </nav>
         </div>
@@ -34,133 +36,245 @@
     <main>
 
         <section id="inicio" class="hero">
-            <div class="container hero__content">
+            <div class="container hero__grid">
+                <div>
+                    <p class="eyebrow">
+                        Tecnologia · Arquitetura · IA
+                    </p>
 
-                <p class="hero__eyebrow">
-                    Tecnologia • Arquitetura • IA
-                </p>
+                    <h1 class="hero__title">
+                        Meu laboratório pessoal de tecnologia.
+                    </h1>
 
-                <h1>
-                    Construindo soluções,
-                    explorando tecnologia
-                    e transformando ideias.
-                </h1>
+                    <p class="hero__description">
+                        Aqui eu registro projetos, estudos e experimentos que desenvolvo 
+                        enquanto aprofundo meus conhecimentos em arquitetura de software, 
+                        sistemas corporativos e inteligência artificial.
+                    </p>
 
-                <p class="hero__description">
-                    Este é meu espaço para compartilhar projetos,
-                    estudos, experimentos e novas experiências
-                    construídas através da tecnologia.
-                </p>
+                    <div class="hero__actions">
+                        <a href="#projetos" class="btn btn-primary">
+                            Ver projetos
+                        </a>
 
-                <div class="hero__actions">
-                    <a href="#projetos" class="button button--primary">
-                        Ver projetos
-                    </a>
-
-                    <a href="#sobre" class="button button--secondary">
-                        Sobre mim
-                    </a>
+                        <a href="#contato" class="btn btn-secondary">
+                            Vamos conversar
+                        </a>
+                    </div>
                 </div>
 
+                <figure class="hero__media" aria-label="Foto de Alex Sousa">
+                    <img
+                        src="./src/assets/images/alex_sousa.png"
+                        alt="Alex Sousa"
+                    >
+                </figure>
             </div>
         </section>
 
         <section id="sobre" class="section">
             <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        01 — Sobre
+                    </span>
 
-                <span class="section__number">
-                    01
-                </span>
+                    <h2 class="section__title">
+                        Quem sou eu
+                    </h2>
 
-                <h2>
-                    Sobre
-                </h2>
-
-                <p class="section__text">
-                    Trabalho com tecnologia, sistemas corporativos,
-                    integração de sistemas e evolução de processos.
-                    Este site também funciona como meu laboratório
-                    pessoal para experimentar novas tecnologias
-                    e transformar ideias em projetos reais.
-                </p>
-
+                    <p class="section__text">
+                        Trabalho com tecnologia, sistemas corporativos,
+                        integração de sistemas e evolução de processos. Este
+                        site é meu espaço para experimentar novas tecnologias,
+                        acompanhar meus estudos e transformar ideias em projetos
+                        reais.
+                    </p>
+                </div>
             </div>
         </section>
 
         <section id="projetos" class="section">
             <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        02 — Projetos
+                    </span>
 
-                <span class="section__number">
-                    02
-                </span>
+                    <h2 class="section__title">
+                        Experimentos
+                    </h2>
+                </div>
 
-                <h2>
-                    Projetos
-                </h2>
-
-                <div class="projects-grid">
-
-                    <article class="project-card">
-
-                        <span class="project-card__status">
+                <div class="grid grid--two">
+                    <article class="card elev-sm">
+                        <span class="tag tag-accent">
                             Em breve
                         </span>
 
-                        <h3>
+                        <h3 class="card-title">
                             Primeiro projeto
                         </h3>
 
-                        <p>
-                            Novos projetos serão publicados aqui
-                            conforme o site evoluir.
+                        <p class="card-body">
+                            Novos projetos serão publicados aqui conforme o
+                            site evoluir.
                         </p>
-
                     </article>
 
-                    <article class="project-card">
-
-                        <span class="project-card__status">
+                    <article class="card elev-sm">
+                        <span class="tag tag-outline">
                             Planejado
                         </span>
 
-                        <h3>
-                            Henri & Nicolas
+                        <h3 class="card-title">
+                            Henry & Nicolas
                         </h3>
 
-                        <p>
-                            Um projeto especial que irá explorar
-                            desenvolvimento de jogos e experiências
-                            interativas.
+                        <p class="card-body">
+                            Um projeto especial para explorar desenvolvimento
+                            de jogos e experiências interativas.
                         </p>
-
                     </article>
+                </div>
+            </div>
+        </section>
 
+        <section id="blog" class="section">
+            <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        03 — Blog
+                    </span>
+
+                    <h2 class="section__title">
+                        Artigos
+                    </h2>
+
+                    <p class="section__text">
+                        Anotações curtas sobre arquitetura, ferramentas,
+                        programação e aprendizados práticos do dia a dia.
+                    </p>
                 </div>
 
+                <div class="grid grid--two">
+                    <article class="card elev-sm">
+                        <span class="tag tag-neutral">
+                            Em breve
+                        </span>
+
+                        <h3 class="card-title">
+                            Primeiro artigo
+                        </h3>
+
+                        <p class="card-body">
+                            Um espaço para organizar estudos e publicar
+                            descobertas com calma, sem formato de rede social.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="estudos" class="section">
+            <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        04 — Estudos
+                    </span>
+
+                    <h2 class="section__title">
+                        Estudos
+                    </h2>
+
+                    <p class="section__text">
+                        Um espaço para organizar formações, cursos, leituras,
+                        anotações e trilhas de aprendizado que vão além do MBA.
+                    </p>
+                </div>
+
+                <div class="grid grid--two">
+                    <article class="card elev-sm">
+                        <span class="tag tag-accent-2">
+                            MBA
+                        </span>
+
+                        <h3 class="card-title">
+                            Engenharia de Software
+                        </h3>
+
+                        <p class="card-body">
+                            Acompanhamento de módulos, resumos e aplicações
+                            práticas do que estou estudando.
+                        </p>
+                    </article>
+
+                    <article class="card elev-sm">
+                        <span class="tag tag-neutral">
+                            Em breve
+                        </span>
+
+                        <h3 class="card-title">
+                            Trilhas técnicas
+                        </h3>
+
+                        <p class="card-body">
+                            Cursos, livros e práticas sobre arquitetura,
+                            programação, dados, IA e ferramentas de engenharia.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="section">
+            <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        05 — Stack
+                    </span>
+
+                    <h2 class="section__title">
+                        Ferramentas
+                    </h2>
+                </div>
+
+                <div class="grid grid--four">
+                    <div class="stack-item">HTML</div>
+                    <div class="stack-item">CSS</div>
+                    <div class="stack-item">JavaScript</div>
+                    <div class="stack-item">GitHub Pages</div>
+                    <div class="stack-item">Python</div>
+                    <div class="stack-item">SQL</div>
+                    <div class="stack-item">Arquitetura</div>
+                    <div class="stack-item">IA</div>
+                </div>
             </div>
         </section>
 
         <section id="contato" class="section">
             <div class="container">
+                <div class="section__header">
+                    <span class="card-kicker">
+                        06 — Contato
+                    </span>
 
-                <span class="section__number">
-                    03
-                </span>
+                    <h2 class="section__title">
+                        Vamos conversar?
+                    </h2>
 
-                <h2>
-                    Vamos conversar?
-                </h2>
+                    <p class="section__text">
+                        Você pode acompanhar meus projetos e estudos pelo
+                        GitHub e LinkedIn.
+                    </p>
+                </div>
 
-                <p class="section__text">
-                    Você pode acompanhar meus projetos e estudos
-                    através do GitHub e LinkedIn.
-                </p>
-
-                <div class="social-links">
+                <div class="section__actions">
                     <a
                         href="https://github.com/alexcarlos06"
                         target="_blank"
                         rel="noopener noreferrer"
+                        class="btn btn-secondary"
                     >
                         GitHub
                     </a>
@@ -169,11 +283,11 @@
                         href="https://www.linkedin.com/in/alexcsousa/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        class="btn btn-secondary"
                     >
                         LinkedIn
                     </a>
                 </div>
-
             </div>
         </section>
 
@@ -181,9 +295,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>
-                © <span id="current-year"></span> Alex Sousa.
-            </p>
+            © <span id="current-year"></span> Alex Sousa.
         </div>
     </footer>
 
