@@ -164,6 +164,8 @@ def build_blog_index(posts: list[Post]) -> None:
     cards = "\n".join(render_post_card(post) for post in posts)
     if not cards:
         cards = '<p class="section__text">Nenhuma postagem publicada ainda.</p>'
+    tag_options = render_tag_options(posts)
+    date_options = render_date_options(posts)
 
     html_doc = f"""<!DOCTYPE html>
 <html lang="pt-BR">
@@ -204,6 +206,30 @@ def build_blog_index(posts: list[Post]) -> None:
                 </p>
             </header>
 
+            <form class="blog-filters" aria-label="Filtros de postagens">
+                <div class="field blog-filters__field">
+                    <label for="filter-tag">Tag</label>
+                    <select class="input" id="filter-tag" name="tag">
+                        <option value="">Todas</option>
+                        {tag_options}
+                    </select>
+                </div>
+
+                <div class="field blog-filters__field">
+                    <label for="filter-date">Publicação</label>
+                    <select class="input" id="filter-date" name="date">
+                        <option value="">Todas</option>
+                        {date_options}
+                    </select>
+                </div>
+
+                <button class="btn btn-secondary blog-filters__clear" type="button" data-clear-filters>
+                    Limpar
+                </button>
+            </form>
+
+            <p class="blog-filter-status" data-filter-status aria-live="polite"></p>
+
             <div class="blog-list__grid">
                 {cards}
             </div>
@@ -217,6 +243,84 @@ def build_blog_index(posts: list[Post]) -> None:
     </footer>
 
     <script src="../src/main.js"></script>
+    <script>
+        const blogPosts = Array.from(document.querySelectorAll("[data-blog-post]"));
+        const tagFilter = document.querySelector("#filter-tag");
+        const dateFilter = document.querySelector("#filter-date");
+        const clearFilters = document.querySelector("[data-clear-filters]");
+        const filterStatus = document.querySelector("[data-filter-status]");
+
+        function optionExists(select, value) {{
+            return !value || Array.from(select.options).some((option) => option.value === value);
+        }}
+
+        function applyInitialFilters() {{
+            const params = new URLSearchParams(window.location.search);
+            const tag = params.get("tag") || "";
+            const date = params.get("date") || "";
+
+            if (optionExists(tagFilter, tag)) {{
+                tagFilter.value = tag;
+            }}
+
+            if (optionExists(dateFilter, date)) {{
+                dateFilter.value = date;
+            }}
+        }}
+
+        function syncFilterUrl() {{
+            const params = new URLSearchParams();
+
+            if (tagFilter.value) {{
+                params.set("tag", tagFilter.value);
+            }}
+
+            if (dateFilter.value) {{
+                params.set("date", dateFilter.value);
+            }}
+
+            const query = params.toString();
+            const nextUrl = query ? `${{window.location.pathname}}?${{query}}` : window.location.pathname;
+            window.history.replaceState(null, "", nextUrl);
+        }}
+
+        function updateBlogFilters(syncUrl = true) {{
+            const selectedTag = tagFilter.value;
+            const selectedDate = dateFilter.value;
+            let visibleCount = 0;
+
+            blogPosts.forEach((post) => {{
+                const tags = post.dataset.tags.split("|");
+                const date = post.dataset.date;
+                const matchesTag = !selectedTag || tags.includes(selectedTag);
+                const matchesDate = !selectedDate || date === selectedDate;
+                const shouldShow = matchesTag && matchesDate;
+
+                post.hidden = !shouldShow;
+                if (shouldShow) {{
+                    visibleCount += 1;
+                }}
+            }});
+
+            filterStatus.textContent = visibleCount === 1
+                ? "1 postagem encontrada."
+                : `${{visibleCount}} postagens encontradas.`;
+
+            if (syncUrl) {{
+                syncFilterUrl();
+            }}
+        }}
+
+        tagFilter.addEventListener("change", updateBlogFilters);
+        dateFilter.addEventListener("change", updateBlogFilters);
+        clearFilters.addEventListener("click", () => {{
+            tagFilter.value = "";
+            dateFilter.value = "";
+            updateBlogFilters();
+        }});
+        applyInitialFilters();
+        updateBlogFilters(false);
+    </script>
 </body>
 </html>
 """
@@ -246,7 +350,8 @@ def build_posts(posts: list[Post]) -> None:
 
 
 def render_post_card(post: Post) -> str:
-    return f"""<article class="card elev-sm post-card">
+    tags_data = html.escape("|".join(post.tags), quote=True)
+    return f"""<article class="card elev-sm post-card" data-blog-post data-tags="{tags_data}" data-date="{post.date.isoformat()}">
     <header class="post-card__header">
         <span class="card-meta">{post.formatted_date}</span>
         <h2 class="post-card__title">
@@ -259,6 +364,18 @@ def render_post_card(post: Post) -> str:
     </div>
     <a class="btn btn-secondary" href="./{html.escape(post.slug)}/" target="_blank" rel="noopener noreferrer">Ler artigo</a>
 </article>"""
+
+
+def render_tag_options(posts: list[Post]) -> str:
+    tags = sorted({tag for post in posts for tag in post.tags}, key=str.casefold)
+    return "\n".join(f'<option value="{html.escape(tag, quote=True)}">{html.escape(tag)}</option>' for tag in tags)
+
+
+def render_date_options(posts: list[Post]) -> str:
+    dates = sorted({post.date for post in posts}, reverse=True)
+    return "\n".join(
+        f'<option value="{item.isoformat()}">{item.strftime("%d/%m/%Y")}</option>' for item in dates
+    )
 
 
 def render_tags(tags: list[str]) -> str:
