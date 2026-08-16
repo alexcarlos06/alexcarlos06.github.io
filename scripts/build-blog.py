@@ -250,14 +250,14 @@ def render_post_card(post: Post) -> str:
     <header class="post-card__header">
         <span class="card-meta">{post.formatted_date}</span>
         <h2 class="post-card__title">
-            <a href="./{html.escape(post.slug)}/">{html.escape(post.title)}</a>
+            <a href="./{html.escape(post.slug)}/" target="_blank" rel="noopener noreferrer">{html.escape(post.title)}</a>
         </h2>
     </header>
     <p class="post-card__description">{html.escape(post.description)}</p>
     <div class="post-card__tags">
         {render_tags(post.tags)}
     </div>
-    <a class="btn btn-secondary" href="./{html.escape(post.slug)}/">Ler artigo</a>
+    <a class="btn btn-secondary" href="./{html.escape(post.slug)}/" target="_blank" rel="noopener noreferrer">Ler artigo</a>
 </article>"""
 
 
@@ -371,7 +371,7 @@ def inline_markdown(text: str) -> str:
 def render_link(match: re.Match[str]) -> str:
     label = match.group(1)
     url = html.escape(match.group(2), quote=True)
-    return f'<a href="{url}">{label}</a>'
+    return f'<a href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>'
 
 
 def render_image(match: re.Match[str]) -> str:
