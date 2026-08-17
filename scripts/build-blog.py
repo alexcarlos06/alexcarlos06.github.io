@@ -355,14 +355,14 @@ def render_post_card(post: Post) -> str:
     <header class="post-card__header">
         <span class="card-meta">{post.formatted_date}</span>
         <h2 class="post-card__title">
-            <a href="./{html.escape(post.slug)}/" target="_blank" rel="noopener noreferrer">{html.escape(post.title)}</a>
+            <a href="./{html.escape(post.slug)}/">{html.escape(post.title)}</a>
         </h2>
     </header>
     <p class="post-card__description">{html.escape(post.description)}</p>
     <div class="post-card__tags">
         {render_tags(post.tags)}
     </div>
-    <a class="btn btn-secondary" href="./{html.escape(post.slug)}/" target="_blank" rel="noopener noreferrer">Ler artigo</a>
+    <a class="btn btn-secondary" href="./{html.escape(post.slug)}/">Ler artigo</a>
 </article>"""
 
 
@@ -480,6 +480,7 @@ def inline_markdown(text: str) -> str:
         escaped = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", render_link, escaped)
         escaped = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", escaped)
         escaped = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", escaped)
+        escaped = auto_link_urls(escaped)
         rendered_parts.append(escaped)
 
     return "".join(rendered_parts)
@@ -489,6 +490,22 @@ def render_link(match: re.Match[str]) -> str:
     label = match.group(1)
     url = html.escape(match.group(2), quote=True)
     return f'<a href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>'
+
+
+def auto_link_urls(text: str) -> str:
+    html_parts = re.split(r"(<a\b[^>]*>.*?</a>|<img\b[^>]*>)", text)
+    return "".join(part if part.startswith("<") else link_plain_urls(part) for part in html_parts)
+
+
+def link_plain_urls(text: str) -> str:
+    return re.sub(r"https?://[^\s<]+", render_plain_url, text)
+
+
+def render_plain_url(match: re.Match[str]) -> str:
+    url = match.group(0).rstrip(".,;:")
+    suffix = match.group(0)[len(url):]
+    escaped_url = html.escape(url, quote=True)
+    return f'<a href="{escaped_url}" target="_blank" rel="noopener noreferrer">{url}</a>{suffix}'
 
 
 def render_image(match: re.Match[str]) -> str:
