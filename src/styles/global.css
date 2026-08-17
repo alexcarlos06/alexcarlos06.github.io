@@ -2,9 +2,11 @@
 
 .nav {
     min-height: 84px;
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
 }
 
 .nav-content {
+    position: relative;
     width: min(
         calc(100% - 40px),
         var(--container-width)
@@ -17,6 +19,23 @@
 
 .nav-brand::before {
     content: "";
+}
+
+.theme-toggle {
+    flex: 0 0 auto;
+    border-color: var(--color-border-strong);
+    background: var(--color-bg-raised);
+}
+
+.theme-toggle:hover {
+    border-color: var(--color-accent-500);
+    color: var(--color-accent-500);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
 .hero {
@@ -58,8 +77,8 @@
     background:
         radial-gradient(
             circle at center,
-            rgba(19, 25, 22, 0.7),
-            rgba(10, 13, 11, 0.95) 72%
+            color-mix(in srgb, var(--color-surface) 70%, transparent),
+            color-mix(in srgb, var(--color-bg) 95%, transparent) 72%
         );
     aspect-ratio: 1;
     overflow: hidden;
@@ -73,13 +92,13 @@
         radial-gradient(
             circle at center,
             transparent 48%,
-            rgba(10, 13, 11, 0.38) 72%,
+            color-mix(in srgb, var(--color-bg) 38%, transparent) 72%,
             var(--color-bg) 100%
         ),
         linear-gradient(
             to bottom,
-            rgba(10, 13, 11, 0.14),
-            rgba(10, 13, 11, 0.34)
+            color-mix(in srgb, var(--color-bg) 14%, transparent),
+            color-mix(in srgb, var(--color-bg) 34%, transparent)
         );
     pointer-events: none;
 }
@@ -112,6 +131,11 @@
         rgba(0, 0, 0, 0.62) 76%,
         transparent 100%
     );
+}
+
+:root[data-theme="light"] .hero__media img {
+    opacity: 0.96;
+    mix-blend-mode: multiply;
 }
 
 .section {
@@ -189,7 +213,14 @@
         width: 100%;
         gap: var(--space-4);
         overflow-x: auto;
+        padding-right: 52px;
         padding-bottom: var(--space-2);
+    }
+
+    .theme-toggle {
+        position: absolute;
+        top: var(--space-4);
+        right: 0;
     }
 
     .hero {
@@ -216,6 +247,10 @@
 
     .btn {
         justify-content: center;
+    }
+
+    .theme-toggle {
+        width: 44px;
     }
 
     .grid--four {
