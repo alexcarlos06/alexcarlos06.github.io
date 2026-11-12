@@ -62,6 +62,36 @@ No indice do blog, os links das postagens devem abrir em nova guia:
 Links escritos dentro dos artigos em Markdown tambem devem abrir em nova guia,
 usando `target="_blank"` e `rel="noopener noreferrer"` no HTML gerado.
 
+
+## Fluxo editorial de novas postagens
+
+Para cada novo artigo, siga a sequencia abaixo:
+
+1. **Elaboracao:** redija um texto autoral, com referencias verificaveis e conexao
+   com a experiencia profissional quando pertinente. Nao reproduza slides ou
+   materiais de terceiros sem autorizacao.
+2. **Aprovacao:** apresente o artigo completo para revisao do autor. Nao crie
+   commits nem publique antes da aprovacao explicita.
+3. **Publicacao:** apos a aprovacao, crie o Markdown com front matter e tags
+   conforme este documento. Respeite o `AGENTS.md` e o fluxo de publicacao
+   existente; registre commit e push no repositorio.
+4. **Validacao:** verifique o resultado do GitHub Actions e confirme que a URL
+   publica do artigo responde e exibe o conteudo corretamente. Nao declare
+   deploy concluido sem essa comprovacao.
+5. **Divulgacao:** prepare uma chamada objetiva para o LinkedIn com link para
+   o artigo completo, alinhada ao posicionamento profissional do autor.
+   Nao divulgue uma URL ainda nao validada como se ja estivesse publicada.
+6. **Imagem de divulgacao (etapa final):** gere uma imagem original para
+   acompanhar a postagem, depois de definir o texto de divulgacao. Preserve a
+   identidade visual do site: fundo escuro, verde neon como acento principal
+   e ambar apenas em contextos de estudo/MBA. Verifique textos, legibilidade e
+   adequacao a publicacao no LinkedIn. Entregue a imagem para avaliacao do
+   autor; nao a inclua automaticamente no blog ou no repositorio, a menos
+   que isso tenha sido solicitado.
+
+Esse fluxo editorial nao altera o pipeline tecnico Markdown -> Python ->
+GitHub Actions -> GitHub Pages.
+
 ## Desenvolvimento local
 
 Gere o site:
